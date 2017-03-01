@@ -3,14 +3,14 @@ package p012;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 //TODO Transform the code to be used safely in a concurrent context.  
-public class Ball {
-       //TODO  Find an archive named Ball.png 
+public class Ball { 
 	private String Ball = "Ball.png"; 
 
 	private double x,y,dx,dy;
 	private double v,fi;
 	private Image image;
 
+	
 	public Ball() {
 		ImageIcon ii = new ImageIcon(this.getClass().getResource(Ball));
 		image = ii.getImage();
@@ -48,7 +48,7 @@ public class Ball {
 		}
 		//TODO Check postcondition	
 	}
-
+	
 	public int getX() {
 		return (int)x;
 	}
