@@ -10,6 +10,12 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Práctica 2-Simulación de objetos físicos
+ * @author Carlos González Calatrava, Sergio López Bueno
+ *
+ *Clase Billiard que inicia e interrumpe los hilos de las bolas.
+ */
 @SuppressWarnings("serial")
 public class Billiards extends JFrame {
 
@@ -54,6 +60,9 @@ public class Billiards extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Metodo que inicializa las bolas
+	 */
 	private void initBalls() {
 		balls=new Ball[N_BALL];
 		for(int i=0;i<N_BALL;i++){
@@ -61,8 +70,14 @@ public class Billiards extends JFrame {
 		}
 	}
 	
+	
 	protected Thread[] threads;
 
+	/**
+	 * Metodo que indica las acciones de cada hilo
+	 * @param b la bola a mover
+	 * @return Thread(runloop) el hilo ejecutable
+	 */
 	protected Thread makeThread (final Ball b){
 		Runnable runloop=new Runnable(){
 			public void run(){
@@ -70,8 +85,8 @@ public class Billiards extends JFrame {
 					for(;;){
 						b.move();
 						b.reflect();
-						board.paint(getGraphics());
-						Thread.sleep(10);
+						board.paint(board.getGraphics());
+						Thread.sleep(100);
 					}
 				}catch (InterruptedException e){
 					return;
@@ -81,6 +96,10 @@ public class Billiards extends JFrame {
 		return new Thread(runloop);
 	}
 	
+	/**
+	 * Clase que indica la acción a realizar al pulsar el botón de empezar
+	 *
+	 */
 	private class StartListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -93,13 +112,21 @@ public class Billiards extends JFrame {
 		}
 	}
 
+	/**
+	 *Clase que indica la acción a realizar al pulsar el boton de parar
+	 */
 	private class StopListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Code is executed when stop button is pushed
+			if (threads != null) {
+				 for (int i = 0; i < threads.length; ++i)
+				 threads[i].interrupt();
+				 threads = null;
+				 }
 		}
 	}
 
+	
 	public static void main(String[] args) {
 		new Billiards();
 	}
