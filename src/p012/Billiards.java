@@ -30,6 +30,7 @@ public class Billiards extends JFrame {
 		board.setBackground(new Color(0, 128, 0));
 
 		initBalls();
+		board.setBalls(balls);
 
 		b_start = new JButton("Empezar");
 		b_start.addActionListener(new StartListener());
@@ -59,12 +60,36 @@ public class Billiards extends JFrame {
 			balls[i]=new Ball();
 		}
 	}
+	
+	protected Thread[] threads;
 
+	protected Thread makeThread (final Ball b){
+		Runnable runloop=new Runnable(){
+			public void run(){
+				try{
+					for(;;){
+						b.move();
+						b.reflect();
+						board.paint(getGraphics());
+						Thread.sleep(10);
+					}
+				}catch (InterruptedException e){
+					return;
+				}
+			}
+		};
+		return new Thread(runloop);
+	}
+	
 	private class StartListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Code is executed when start button is pushed
-
+			board.setBalls(balls);
+			threads = new Thread[N_BALL];
+			for (int i = 0; i < N_BALL ; i++){
+				threads[i]= makeThread (balls[i]);
+				threads[i].start();
+			}
 		}
 	}
 
@@ -72,7 +97,6 @@ public class Billiards extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when stop button is pushed
-
 		}
 	}
 
