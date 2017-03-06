@@ -49,7 +49,10 @@ public class Ball {
 		if (Math.abs(y - Board.TOPBOARD) <  Math.abs(dy)) {
 			fi = - fi;
 		}
-		//TODO Check postcondition	
+		assert x > Board.LEFTBOARD;
+		assert x < Board.RIGHTBOARD;
+		assert y > Board.BOTTOMBOARD;
+		assert y < Board.TOPBOARD;	
 	}
 	
 	public int getX() {
