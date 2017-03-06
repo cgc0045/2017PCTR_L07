@@ -2,7 +2,7 @@ package p012;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
-//TODO Transform the code to be used safely in a concurrent context.  
+
 public class Ball { 
 	private String Ball = "Ball.png"; 
 
@@ -20,7 +20,7 @@ public class Ball {
 		fi =  Math.random() * Math.PI * 2;
 	}
 
-	public void move() {
+	public synchronized void move() {
 		v = v*Math.exp(-v/1000);
 		dx = v*Math.cos(fi);
 		dy = v*Math.sin(fi);
@@ -36,7 +36,7 @@ public class Ball {
 		assert y < Board.TOPBOARD;
 	}
 
-	public void reflect() {
+	public synchronized void reflect() {
 		if (Math.abs(x + 32 - Board.RIGHTBOARD) <  Math.abs(dx)) {
 			fi = Math.PI - fi;
 		}
