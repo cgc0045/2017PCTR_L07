@@ -10,7 +10,9 @@ public class Ball {
 	private double v,fi;
 	private Image image;
 
-	
+	/**
+	 * Constructor de la clase Ball
+	 */
 	public Ball() {
 		ImageIcon ii = new ImageIcon(this.getClass().getResource(Ball));
 		image = ii.getImage();
@@ -20,6 +22,9 @@ public class Ball {
 		fi =  Math.random() * Math.PI * 2;
 	}
 
+	/**
+	 * Método encargado de mover la bola dentro del tablero.
+	 */
 	public synchronized void move() {
 		v = v*Math.exp(-v/1000);
 		dx = v*Math.cos(fi);
@@ -36,6 +41,10 @@ public class Ball {
 		assert y < Board.TOPBOARD;
 	}
 
+	/**
+	 * Método que refleja la bola cuando pega contra una de las
+	 * paredes del tablero.
+	 */
 	public synchronized void reflect() {
 		if (Math.abs(x + 32 - Board.RIGHTBOARD) <  Math.abs(dx)) {
 			fi = Math.PI - fi;
@@ -55,30 +64,59 @@ public class Ball {
 		assert y < Board.TOPBOARD;	
 	}
 	
+	/**
+	 * Método que devuelve la coordenada X.
+	 * @return Coordenada X.
+	 */
 	public int getX() {
 		return (int)x;
 	}
 	
+	/**
+	 * Método que devuelve la coordenada Y.
+	 * @return Coordenada Y.
+	 */
 	public int getY() {
 		return (int)y;
 	}
 	
+	/**
+	 * Método que devuelve el ángulo de rebote.
+	 * @return Ángulo.
+	 */
 	public double getFi() {
 		return fi;
 	}
 
+	/**
+	 * Método que devuelve el módulo de la dirección de la bola.
+	 * @return Módulo.
+	 */
 	public double getdr() {
 		return Math.sqrt(dx*dx+dy*dy);
 	}
 
+	/**
+	 * Método que establece la coordenada X.
+	 * @param x Coordenada X.
+	 */
 	public void setX(double x) {
 		this.x = x;
 	}
 
+	/**
+	 * Método que establece la coordenada Y.
+	 * @param y Coordenada Y.
+	 */
 	public void setY(double y) {
 		this.y = y;
 	}
 
+	/**
+	 * Método que devuelve la imagen que se usa para
+	 * representar la bola.
+	 * @return Imagen.
+	 */
 	public Image getImage() {
 		return image;
 	}
