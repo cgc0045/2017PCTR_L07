@@ -85,8 +85,8 @@ public class Billiards extends JFrame {
 					for(;;){
 						b.move();
 						b.reflect();
-						board.paint(board.getGraphics());
-						Thread.sleep(100);
+						board.repaint();
+						Thread.sleep(10);
 					}
 				}catch (InterruptedException e){
 					return;
@@ -126,7 +126,11 @@ public class Billiards extends JFrame {
 		}
 	}
 
-	
+	/**
+	 * Método principal del programa donde lanzamos nuestra aplicación.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new Billiards();
 	}
