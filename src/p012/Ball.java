@@ -3,6 +3,12 @@ package p012;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
+/**
+ * Práctica 2-Simulación de objetos físicos
+ * @author Carlos González Calatrava, Sergio López Bueno
+ *
+ * Clase Bola que define el comportamiento de las bolas dentro del tablero.
+ */
 public class Ball { 
 	private String Ball = "Ball.png"; 
 
